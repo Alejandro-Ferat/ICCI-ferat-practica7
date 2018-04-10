@@ -4,7 +4,7 @@ Introducción a Ciencias de la Computación
 Práctica 7: Iteradores
 ----------------------
 
-### Fecha de entrega: martes 17 de abril, 2017
+### Fecha de entrega: martes 17 de abril, 2018
 
 Deben hacer iterable su clase
 [`Lista`](https://aztlan.fciencias.unam.mx/gitlab/2018-2-icc/practica7/blob/master/src/mx/unam/ciencias/icc/Lista.java).
