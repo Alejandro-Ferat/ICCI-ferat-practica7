@@ -29,7 +29,7 @@ public abstract class BaseDeDatos<R extends Registro, C extends Enum> {
      * Constructor único.
      */
     public BaseDeDatos() {
-        // Aquí va su código.
+        registros = new Lista<R>();
     }
 
     /**
@@ -37,7 +37,7 @@ public abstract class BaseDeDatos<R extends Registro, C extends Enum> {
      * @return el número de registros en la base de datos.
      */
     public int getNumRegistros() {
-        // Aquí va su código.
+        return registros.getLongitud();
     }
 
     /**
@@ -46,7 +46,7 @@ public abstract class BaseDeDatos<R extends Registro, C extends Enum> {
      * @return una lista con los registros en la base de datos.
      */
     public Lista<R> getRegistros() {
-        // Aquí va su código.
+        return registros.copia();
     }
 
     /**
@@ -54,7 +54,7 @@ public abstract class BaseDeDatos<R extends Registro, C extends Enum> {
      * @param registro el registro que hay que agregar a la base de datos.
      */
     public void agregaRegistro(R registro) {
-        // Aquí va su código.
+        registros.agregaFinal(registro);
     }
 
     /**
@@ -62,14 +62,14 @@ public abstract class BaseDeDatos<R extends Registro, C extends Enum> {
      * @param registro el registro que hay que eliminar de la base de datos.
      */
     public void eliminaRegistro(R registro) {
-        // Aquí va su código.
+        registros.elimina(registro);
     }
 
     /**
      * Limpia la base de datos.
      */
     public void limpia() {
-        // Aquí va su código.
+        registros.limpia();
     }
 
     /**
@@ -78,7 +78,11 @@ public abstract class BaseDeDatos<R extends Registro, C extends Enum> {
      * @throws IOException si ocurre un error de entrada/salida.
      */
     public void guarda(BufferedWriter out) throws IOException {
-        // Aquí va su código.
+        IteradorLista<R> iterador = registros.iteradorLista();
+	while(iterador.hasNext() ){
+	    Registro r= iterador.next();
+	    r.guarda(out);
+	}
     }
 
     /**
@@ -89,7 +93,12 @@ public abstract class BaseDeDatos<R extends Registro, C extends Enum> {
      * @throws IOException si ocurre un error de entrada/salida.
      */
     public void carga(BufferedReader in) throws IOException {
-        // Aquí va su código.
+        registros.limpia();
+	R r = this.creaRegistro();
+	while(r.carga(in)){
+	    registros.agregaFinal(r);
+	    r=this.creaRegistro();
+	}
     }
 
     /**
